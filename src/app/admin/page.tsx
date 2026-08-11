@@ -1,5 +1,5 @@
 import { Building2, ArrowUpRight, BellOff } from "lucide-react";
-
+import Link from "next/link";
 import { getEmployeeContext } from "@/lib/supabase/employee";
 import { createClient } from "@/lib/supabase/server";
 import { classifyCheckIn } from "@/lib/attendance";
@@ -12,8 +12,9 @@ import { AttendanceTrendChart } from "@/components/charts/attendance-trend-chart
 import { PostNoticeDialog } from "./notice-dialog";
 import { DismissNoticeButton } from "./dismiss-notice-button";
 import { PageHeader } from "@/components/admin/page-header";
+import { RealtimeRefresher } from "@/components/admin/realtime-refresher";
+import { MetricTileContent } from "@/components/admin/metric-tile-content";
 import { Callout } from "@/components/callout";
-import { StatValue } from "@/components/site/stat-value";
 import { BentoGrid, BentoCard } from "@/components/motion/bento";
 import {
   CardHeader,
@@ -60,6 +61,25 @@ const KPI_TILES = [
   { key: "absent", label: "Absent" },
   { key: "onLeave", label: "On leave" },
 ] as const;
+
+// Builds a 7-bar mini-chart + week-over-week trend % for one status field,
+// straight from the same 14-day series already fetched for the trend chart.
+// No historical series exists for on-leave, so this only covers the three
+// fields that actually have one.
+function buildMetricSeries(
+  data: { present: number; late: number; absent: number }[],
+  field: "present" | "late" | "absent"
+) {
+  const recent = data.slice(-7);
+  const values = recent.map((d) => d[field]);
+  const max = Math.max(1, ...values);
+  const bars = values.map((v) => Math.round((v / max) * 100));
+  const latest = values[values.length - 1] ?? 0;
+  const earliest = values[0] ?? latest;
+  const trend =
+    earliest === 0 ? (latest > 0 ? 100 : 0) : Math.round(((latest - earliest) / earliest) * 100);
+  return { bars, trend };
+}
 
 export default async function AdminOverviewPage() {
   const identity = await getEmployeeContext();
@@ -135,6 +155,12 @@ export default async function AdminOverviewPage() {
     now,
   });
 
+  const metricSeries = {
+    present: buildMetricSeries(trendData, "present"),
+    late: buildMetricSeries(trendData, "late"),
+    absent: buildMetricSeries(trendData, "absent"),
+  } as const;
+
   const firstCheckInByEmployee = new Map<string, string>();
   for (const ev of todaysEvents) {
     if (ev.event_type === "check_in" && !firstCheckInByEmployee.has(ev.employee_id)) {
@@ -188,9 +214,10 @@ export default async function AdminOverviewPage() {
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-6">
+      <RealtimeRefresher orgId={identity.orgId} />
       <PageHeader
         title="Overview"
-        description={`Live status across all sites — ${identity.orgName}.`}
+        description={`Live status across all sites.`}
         action={<PostNoticeDialog sites={sites ?? []} />}
       />
 
@@ -213,24 +240,28 @@ export default async function AdminOverviewPage() {
       )}
 
       <BentoGrid>
-        {KPI_TILES.map(({ key, label }) => (
-          <BentoCard
-            key={key}
-            particles
-            magnetism
-            ripple
-            className="border-t-2 border-t-foreground"
-          >
-            <CardContent>
-              <div className="font-serif text-4xl leading-none tabular-nums">
-                <StatValue value={String(kpi[key])} />
-              </div>
-              <div className="font-label mt-2 text-muted-foreground">
-                {label}
-              </div>
-            </CardContent>
-          </BentoCard>
-        ))}
+        {KPI_TILES.map(({ key, label }) => {
+          const series = key === "onLeave" ? null : metricSeries[key];
+          return (
+            <BentoCard
+              key={key}
+              particles
+              magnetism
+              ripple
+              className="border-t-2 border-t-foreground"
+            >
+              <CardContent>
+                <MetricTileContent
+                  eyebrow="TODAY"
+                  value={kpi[key]}
+                  caption={label}
+                  trend={series?.trend ?? null}
+                  bars={series?.bars}
+                />
+              </CardContent>
+            </BentoCard>
+          );
+        })}
 
         <BentoCard className="sm:col-span-2 lg:col-span-3">
           <CardHeader>
@@ -279,12 +310,10 @@ export default async function AdminOverviewPage() {
                 </div>
               );
             })}
-            <a
-              href="/admin/sites"
-              className="mt-3 inline-flex items-center gap-1 text-sm text-primary hover:underline"
-            >
+            
+              <Link href="/admin/sites" className="mt-3 inline-flex items-center gap-1 text-sm text-primary hover:underline">
               View all sites <ArrowUpRight className="size-3.5" />
-            </a>
+            </Link>
           </CardContent>
         </BentoCard>
 
@@ -301,9 +330,6 @@ export default async function AdminOverviewPage() {
                 No exceptions {hasAnyData ? "so far today." : "— add staff to see data here."}
               </p>
             ) : (
-              /* BentoCard clips (overflow-hidden, for the particles and the
-                 glow ring), so a wide table has to scroll in its own box
-                 rather than relying on the card to let it spill. */
               <div className="overflow-x-auto">
               <Table>
                 <TableHeader>

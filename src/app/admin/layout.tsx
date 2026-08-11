@@ -8,7 +8,7 @@ import { AdminTopbar } from "@/components/admin/topbar";
 import { AdminIdentityProvider } from "@/components/admin/identity-context";
 
 export const metadata: Metadata = {
-  title: "AttendPAC — Admin",
+  title: "ActivHR — Admin",
 };
 
 export default async function AdminLayout({

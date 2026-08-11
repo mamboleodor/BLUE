@@ -14,76 +14,75 @@
 :root {
   --radius: 0.2rem;
 
-  /* base palette, straight from DS-01 */
-  --pac-ink: #171210;
-  --pac-graphite: #2a211d;
-  --pac-orange: #e8532e;
-  --pac-orange-light: #f4a98d;
-  --pac-ember: #a63a1c;
-  --pac-paper: #f7f3ec;
+  /* base palette — swapped from PAC warm/orange to a cool slate/blue system */
+  --pac-ink: #0f172a;
+  --pac-graphite: #1e293b;
+  --pac-orange: #2563eb;       /* now "primary blue" — kept var name for compatibility */
+  --pac-orange-light: #f59e0b; /* repurposed as the "late/warning" amber accent */
+  --pac-ember: #1d4ed8;
+  --pac-paper: #f8fafc;
 
   --background: var(--pac-paper);
   --foreground: var(--pac-ink);
 
-  --card: #fffdfa;
+  --card: #ffffff;
   --card-foreground: var(--pac-ink);
 
-  --popover: #fffdfa;
+  --popover: #ffffff;
   --popover-foreground: var(--pac-ink);
 
   --primary: var(--pac-orange);
-  --primary-foreground: var(--pac-ink);
+  --primary-foreground: #ffffff;
 
-  --secondary: #ece6da;
+  --secondary: #f1f5f9;
   --secondary-foreground: var(--pac-ink);
 
-  --muted: #ece6da;
-  --muted-foreground: #6b5f52;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
 
-  --accent: var(--pac-orange-light);
-  --accent-foreground: var(--pac-ember);
+  --accent: #dbeafe;
+  --accent-foreground: #1e40af;
 
-  --destructive: var(--pac-ember);
-  --destructive-foreground: var(--pac-paper);
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
 
-  --border: rgb(23 18 16 / 12%);
-  --input: rgb(23 18 16 / 16%);
+  --border: rgb(15 23 42 / 8%);
+  --input: rgb(15 23 42 / 12%);
   --ring: var(--pac-orange);
 
-  /* typefaces — self-hosted via @fontsource, no Google Fonts CDN call */
   --font-plex-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-source-serif: "Source Serif 4 Variable", ui-serif, Georgia, serif;
   --font-plex-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
 .dark {
-  --background: var(--pac-ink);
-  --foreground: var(--pac-paper);
+  --background: #0b1220;
+  --foreground: #f1f5f9;
 
   --card: var(--pac-graphite);
-  --card-foreground: var(--pac-paper);
+  --card-foreground: #f1f5f9;
 
   --popover: var(--pac-graphite);
-  --popover-foreground: var(--pac-paper);
+  --popover-foreground: #f1f5f9;
 
-  --primary: var(--pac-orange);
-  --primary-foreground: var(--pac-ink);
+  --primary: #3b82f6;
+  --primary-foreground: #0b1220;
 
-  --secondary: #362b23;
-  --secondary-foreground: var(--pac-paper);
+  --secondary: #1e293b;
+  --secondary-foreground: #f1f5f9;
 
-  --muted: #362b23;
-  --muted-foreground: #b8ab9c;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
 
-  --accent: var(--pac-ember);
-  --accent-foreground: var(--pac-paper);
+  --accent: #1e40af;
+  --accent-foreground: #dbeafe;
 
-  --destructive: #c94a28;
-  --destructive-foreground: var(--pac-paper);
+  --destructive: #ef4444;
+  --destructive-foreground: #f1f5f9;
 
-  --border: rgb(247 243 236 / 12%);
-  --input: rgb(247 243 236 / 16%);
-  --ring: var(--pac-orange);
+  --border: rgb(241 245 249 / 10%);
+  --input: rgb(241 245 249 / 14%);
+  --ring: #3b82f6;
 }
 
 @theme inline {
@@ -214,5 +213,175 @@
 @media (prefers-reduced-motion: reduce) {
   .bento-card::after {
     display: none;
+  }
+}
+/* ── Terminal-glitch auth card ─────────────────────────────────────────────
+   Always dark regardless of light/dark mode — an intentional "terminal
+   window on paper" contrast, not a theming bug. Colors pull from existing
+   tokens (--primary, --pac-orange-light) rather than new hardcoded ones. */
+
+.glitch-card {
+  background-color: var(--pac-ink);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+  box-shadow:
+    0 0 24px color-mix(in srgb, var(--primary) 15%, transparent),
+    inset 0 0 12px rgb(0 0 0 / 40%);
+}
+
+.glitch-card__header {
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+  background-color: rgb(0 0 0 / 25%);
+}
+
+.glitch-field {
+  position: relative;
+}
+
+.glitch-field input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid color-mix(in srgb, var(--primary) 30%, transparent);
+  padding: 0.75em 0;
+  font-size: 1rem;
+  color: var(--pac-paper);
+  font-family: var(--font-plex-mono);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.glitch-field input:focus {
+  border-color: var(--primary);
+}
+
+.glitch-field label {
+  position: absolute;
+  top: 0.75em;
+  left: 0;
+  font-family: var(--font-plex-mono);
+  font-size: 1rem;
+  color: var(--primary);
+  opacity: 0.65;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.glitch-field input:focus + label,
+.glitch-field input:not(:placeholder-shown) + label {
+  top: -1.2em;
+  font-size: 0.75rem;
+  opacity: 1;
+}
+
+.glitch-field input:focus + label::before,
+.glitch-field input:focus + label::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background-color: var(--pac-ink);
+}
+
+.glitch-field input:focus + label::before {
+  color: var(--pac-orange-light);
+  animation: glitch-anim 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.glitch-field input:focus + label::after {
+  color: var(--primary);
+  animation: glitch-anim 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+}
+
+@keyframes glitch-anim {
+  0% { transform: translate(0); clip-path: inset(0 0 0 0); }
+  20% { transform: translate(-5px, 3px); clip-path: inset(50% 0 20% 0); }
+  40% { transform: translate(3px, -2px); clip-path: inset(20% 0 60% 0); }
+  60% { transform: translate(-4px, 2px); clip-path: inset(80% 0 5% 0); }
+  80% { transform: translate(4px, -3px); clip-path: inset(30% 0 45% 0); }
+  100% { transform: translate(0); clip-path: inset(0 0 0 0); }
+}
+
+.glitch-submit {
+  position: relative;
+  width: 100%;
+  padding: 0.8em;
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  font-family: var(--font-plex-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.glitch-submit:hover,
+.glitch-submit:focus {
+  background-color: var(--primary);
+  color: var(--pac-ink);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 60%, transparent);
+}
+
+.glitch-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.glitch-submit__text {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  transition: opacity 0.2s ease;
+}
+
+.glitch-submit:hover .glitch-submit__text {
+  opacity: 0;
+}
+
+.glitch-submit::before,
+.glitch-submit::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.glitch-submit:hover::before,
+.glitch-submit:focus::before {
+  opacity: 1;
+  color: var(--pac-orange-light);
+  animation: glitch-anim 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.glitch-submit:hover::after,
+.glitch-submit:focus::after {
+  opacity: 1;
+  color: var(--pac-ink);
+  background-color: var(--primary);
+  animation: glitch-anim 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch-field input:focus + label::before,
+  .glitch-field input:focus + label::after,
+  .glitch-submit:hover::before,
+  .glitch-submit:focus::before,
+  .glitch-submit:hover::after,
+  .glitch-submit:focus::after {
+    animation: none;
+    opacity: 0;
+  }
+  .glitch-submit:hover .glitch-submit__text {
+    opacity: 1;
   }
 }

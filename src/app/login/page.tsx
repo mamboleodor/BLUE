@@ -2,19 +2,9 @@
 
 import * as React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Loader2 } from "lucide-react";
+import { Loader2, FileText } from "lucide-react";
 
 import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
 import { Reveal } from "@/components/motion/reveal";
 
 type Mode = "sign-in" | "sign-up" | "forgot";
@@ -145,7 +135,6 @@ function LoginForm() {
       return;
     }
 
-    // email confirmation is off for this project — session exists already
     router.push("/onboarding");
     router.refresh();
   }
@@ -155,85 +144,106 @@ function LoginForm() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-secondary/40 px-4">
       <Reveal className="w-full max-w-sm" distance={14} duration={0.45}>
-      <Card className="w-full">
-        <CardHeader>
-          <div className="flex items-baseline gap-1.5">
-            <span className="font-serif text-xl">Attend</span>
-            <span className="font-serif text-xl italic text-primary">Pac</span>
-          </div>
-          <CardTitle className="mt-4">{copy.title}</CardTitle>
-          <CardDescription>{copy.description}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+        <div className="glitch-card">
+          <div className="glitch-card__header flex items-center justify-between px-5 py-3">
+            <div className="flex items-center gap-2 text-primary">
+              <FileText className="size-4" strokeWidth={1.75} />
+              <span className="font-label" style={{ color: "var(--primary)" }}>
+                Activ_HR_Auth
+              </span>
             </div>
+            <div className="flex gap-1.5">
+              <span className="size-2 rounded-full bg-white/10" />
+              <span className="size-2 rounded-full bg-white/10" />
+              <span className="size-2 rounded-full bg-white/10" />
+            </div>
+          </div>
 
-            {mode !== "forgot" && (
-              <div className="flex flex-col gap-2">
-                <div className="flex items-baseline justify-between gap-2">
-                  <Label htmlFor="password">Password</Label>
-                  {mode === "sign-in" && (
-                    <button
-                      type="button"
-                      onClick={() => switchTo("forgot")}
-                      className="rounded-sm text-xs text-muted-foreground hover:text-primary"
-                    >
-                      Forgot password?
-                    </button>
-                  )}
-                </div>
-                <Input
-                  id="password"
-                  type="password"
-                  autoComplete={
-                    mode === "sign-in" ? "current-password" : "new-password"
-                  }
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  minLength={6}
+          <div className="p-6">
+            <h1 className="mb-1 font-serif text-xl text-white">{copy.title}</h1>
+            <p className="mb-6 text-sm" style={{ color: "var(--pac-paper)", opacity: 0.6 }}>
+              {copy.description}
+            </p>
+
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <div className="glitch-field">
+                <input
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
+                  placeholder=" "
                 />
+                <label htmlFor="email" data-text="EMAIL">EMAIL</label>
               </div>
-            )}
 
-            {info && <p className="text-sm text-muted-foreground">{info}</p>}
-            {error && <p className="text-sm text-destructive">{error}</p>}
+              {mode !== "forgot" && (
+                <div className="glitch-field">
+                  <input
+                    id="password"
+                    type="password"
+                    autoComplete={mode === "sign-in" ? "current-password" : "new-password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    minLength={6}
+                    required
+                    placeholder=" "
+                  />
+                  <label htmlFor="password" data-text="PASSWORD">PASSWORD</label>
+                </div>
+              )}
 
-            <Button type="submit" disabled={loading} className="mt-1">
-              {loading && <Loader2 className="animate-spin" />}
-              {copy.submit}
-            </Button>
+              {mode === "sign-in" && (
+                <button
+                  type="button"
+                  onClick={() => switchTo("forgot")}
+                  className="-mt-3 self-end font-label text-white/40 hover:text-primary"
+                >
+                  Forgot password?
+                </button>
+              )}
 
-            <button
-              type="button"
-              onClick={() =>
-                switchTo(
-                  mode === "sign-in"
-                    ? "sign-up"
-                    : mode === "sign-up"
-                      ? "sign-in"
-                      : "sign-in"
-                )
-              }
-              className="text-center text-xs text-muted-foreground hover:text-foreground"
-            >
-              {mode === "sign-in" && "New here? Create an organization"}
-              {mode === "sign-up" && "Already have an account? Sign in"}
-              {mode === "forgot" && "Back to sign in"}
-            </button>
-          </form>
-        </CardContent>
-      </Card>
+              {info && (
+                <p className="text-sm" style={{ color: "var(--pac-orange-light)" }}>
+                  {info}
+                </p>
+              )}
+              {error && <p className="text-sm text-destructive">{error}</p>}
+
+              <button
+                type="submit"
+                disabled={loading}
+                data-text={copy.submit}
+                className="glitch-submit"
+              >
+                <span className="glitch-submit__text">
+                  {loading && <Loader2 className="size-4 animate-spin" />}
+                  {copy.submit}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  switchTo(
+                    mode === "sign-in"
+                      ? "sign-up"
+                      : mode === "sign-up"
+                        ? "sign-in"
+                        : "sign-in"
+                  )
+                }
+                className="text-center font-label text-white/40 hover:text-white/70"
+              >
+                {mode === "sign-in" && "New here? Create an organization"}
+                {mode === "sign-up" && "Already have an account? Sign in"}
+                {mode === "forgot" && "Back to sign in"}
+              </button>
+            </form>
+          </div>
+        </div>
       </Reveal>
     </div>
   );

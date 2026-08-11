@@ -90,8 +90,8 @@ export function AdminSidebar() {
     <aside className="hidden w-60 shrink-0 flex-col border-r border-border bg-card md:flex">
       <div className="flex h-16 items-center border-b border-border px-6">
         <Link href="/admin" className="flex items-baseline gap-1.5">
-          <span className="font-serif text-lg">Attend</span>
-          <span className="font-serif text-lg italic text-primary">Pac</span>
+          <span className="font-serif text-lg">Activ</span>
+          <span className="font-serif text-lg italic text-primary">HR</span>
         </Link>
       </div>
 
