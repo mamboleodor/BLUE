@@ -1,5 +1,5 @@
 "use client";
-
+import HoverRevealBox from "@/components/HoverRevealBox";
 import * as React from "react";
 import { Check, Loader2 } from "lucide-react";
 
@@ -51,10 +51,10 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       className="grid gap-5 rounded-sm border border-border bg-card p-6 sm:grid-cols-2 sm:p-8"
     >
-      <div className="flex flex-col gap-2">
+      <HoverRevealBox className="flex flex-col gap-2">
         <Label htmlFor="fullName">Full name</Label>
         <Input id="fullName" name="fullName" placeholder="Wanjiku Mwangi" required />
-      </div>
+      </HoverRevealBox>
 
       <div className="flex flex-col gap-2">
         <Label htmlFor="workEmail">Work email</Label>
@@ -77,7 +77,7 @@ export function ContactForm() {
         <Input id="phone" name="phone" type="tel" placeholder="+254 7XX XXX XXX" />
       </div>
 
-      <div className="flex flex-col gap-2 sm:col-span-2">
+      <HoverRevealBox className="flex flex-col gap-2 sm:col-span-2">
         <Label htmlFor="teamSize">Team size</Label>
         <Select name="teamSize">
           <SelectTrigger id="teamSize" className="sm:max-w-xs">
@@ -91,8 +91,7 @@ export function ContactForm() {
             ))}
           </SelectContent>
         </Select>
-      </div>
-
+      </HoverRevealBox>
       <div className="flex flex-col gap-2 sm:col-span-2">
         <Label htmlFor="message">What are you trying to solve?</Label>
         <Textarea

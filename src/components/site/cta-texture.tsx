@@ -28,14 +28,14 @@ export function CtaTexture() {
       className="pointer-events-auto absolute inset-0 [mask-image:radial-gradient(80%_100%_at_30%_50%,black_10%,transparent_85%)]"
     >
       <ShapeGrid
-        shape="hexagon"
-        direction="right"
-        speed={0.25}
-        squareSize={44}
-        borderColor="rgba(247, 243, 236, 0.08)"
-        hoverFillColor="rgba(232, 83, 46, 0.22)"
-        hoverTrailAmount={3}
-      />
+  shape="hexagon"
+  direction="right"
+  speed={0.25}
+  squareSize={44}
+  borderColor="rgba(247, 243, 236, 0.08)"
+  hoverFillColor="rgba(37, 99, 235, 0.22)"
+  hoverTrailAmount={3}
+/>
     </div>
   );
 }

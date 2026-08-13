@@ -18,7 +18,35 @@ import { PowerSyncProvider } from "@/lib/powersync/provider";
 export const metadata: Metadata = {
   title: "ActivHR — Workforce Attendance & Time Management",
   description:
-    "Cloud-native, mobile-first workforce attendance and time-tracking platform for the Kenyan market.",
+    "Cloud-native, mobile-first workforce attendance and time-tracking platform for the Kenyan market. Geofenced check-ins, biometric integration, and real-time reporting.",
+  keywords: [
+    "workforce management",
+    "attendance tracking",
+    "time and attendance",
+    "biometric attendance",
+    "geofencing",
+    "Kenyan market",
+    "HR software Kenya",
+    "ActivHR",
+    "staff management",
+    "timesheets",
+  ],
+  authors: [{ name: "ActivHR" }],
+  openGraph: {
+    title: "ActivHR — Workforce Attendance & Time Management",
+    description:
+      "Modern workforce attendance and time-tracking platform for the Kenyan market.",
+    url: "https://activhr.africa",
+    siteName: "ActivHR",
+    locale: "en_KE",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ActivHR — Workforce Attendance & Time Management",
+    description:
+      "Modern workforce attendance and time-tracking platform for the Kenyan market.",
+  },
 };
 
 export default function RootLayout({
