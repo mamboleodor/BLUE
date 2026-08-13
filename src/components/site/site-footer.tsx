@@ -27,6 +27,14 @@ const COLUMNS = [
     ],
   },
   {
+    title: "Legal",
+    links: [
+      { label: "Cookie Policy", href: "/cookie-policy" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms of Service", href: "/terms-of-service" },
+    ],
+  },
+  {
     title: "Company",
     links: [
       { label: "Request a pilot", href: "/#contact" },
