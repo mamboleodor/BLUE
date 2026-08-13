@@ -52,8 +52,7 @@ export function SiteFooter() {
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <div className="flex items-baseline gap-1.5">
-              <span className="font-serif text-xl">Attend</span>
-              <span className="font-serif text-xl italic text-primary">Pac</span>
+              <span className="font-serif text-xl">ActivHR</span>
             </div>
             <p className="mt-3 max-w-xs text-sm text-pac-paper/60">
               Attendance software for teams that work on-site and in the field.
@@ -81,7 +80,7 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col justify-between gap-2 border-t border-pac-paper/15 pt-6 sm:flex-row">
           <span className="font-label text-pac-paper/50">
-            PAC Africa · Gordian Knotz Technovation · Confidential
+            ActivHR · Confidential
           </span>
           <span className="font-label text-pac-paper/50">Made in Nairobi</span>
         </div>

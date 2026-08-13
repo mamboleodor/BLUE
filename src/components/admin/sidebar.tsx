@@ -90,8 +90,7 @@ export function AdminSidebar() {
     <aside className="hidden w-60 shrink-0 flex-col border-r border-border bg-card md:flex">
       <div className="flex h-16 items-center border-b border-border px-6">
         <Link href="/admin" className="flex items-baseline gap-1.5">
-          <span className="font-serif text-lg">Activ</span>
-          <span className="font-serif text-lg italic text-primary">HR</span>
+          <span className="font-serif text-lg">ActivHR</span>
         </Link>
       </div>
 
@@ -128,7 +127,7 @@ export function AdminSidebar() {
 
       <div className="border-t border-border p-3">
         <span className="font-label text-muted-foreground px-3">
-          PAC Africa · Demo data
+          ActivHR · Demo data
         </span>
       </div>
     </aside>

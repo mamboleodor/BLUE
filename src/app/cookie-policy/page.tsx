@@ -19,7 +19,7 @@ export default function CookiePolicy() {
         <p className="mt-4 text-muted-foreground">
           ActivHR Cookie Policy<br/>
           12/08/2026<br/>
-          This Cookie Policy explains how PRIORITY ACTIVATOR CONSULTING (“PAC Africa”, “we”, “us”) uses cookies and similar technologies on actichr.africa and within the ActivHR web application (together, the “Service”). It should be read alongside our Privacy Policy at actichr.africa/privacy.<br/>
+          This Cookie Policy explains how PRIORITY ACTIVATOR CONSULTING (“ActivHR”, “we”, “us”) uses cookies and similar technologies on actichr.africa and within the ActivHR web application (together, the “Service”). It should be read alongside our Privacy Policy at actichr.africa/privacy.<br/>
           This policy covers the marketing site and web dashboard. It does not apply to the ActivHR mobile app, which does not use browser cookies; mobile data collection is covered in the Privacy Policy and the Employee Notice.<br/><br/>
           1. What cookies are<br/>
           Cookies are small text files placed on your device when you visit a website. They let the site remember information about your visit, such as your login session or preferences, and can also be used to recognise you across visits or sites.<br/>
@@ -44,7 +44,7 @@ export default function CookiePolicy() {
           7. Changes to this policy<br/>
           We may update this Cookie Policy from time to time. Material changes will be reflected by an updated effective date at the top of this page, and, where required, we will seek renewed consent via the cookie banner.<br/><br/>
           8. Contact us<br/>
-          For questions about this policy or to exercise your rights under the Kenya Data Protection Act, contact info@pac.africa.
+          For questions about this policy or to exercise your rights under the Kenya Data Protection Act, contact info@activhr.africa.
         </p>
       </section>
     </div>

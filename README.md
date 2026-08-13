@@ -1,6 +1,6 @@
-# AttendPAC
+# ActivHR
 
-Workforce attendance & time management platform — PAC Africa Technology Division.
+Workforce attendance & time management platform — ActivHR Technology Division.
 Engineering delivery: Gordian Knotz Technovation.
 
 ## Stack
