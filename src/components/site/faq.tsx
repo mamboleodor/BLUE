@@ -6,7 +6,7 @@ import { RevealHeading } from "@/components/motion/reveal-heading";
 
 const FAQS = [
   [
-    "Is AttendPAC free to try?",
+    "Is ActivHR free to try?",
     "Yes. Start a free trial for your organization, no credit card required, and upgrade as your team grows.",
   ],
   [

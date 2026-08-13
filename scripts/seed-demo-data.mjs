@@ -1,4 +1,4 @@
-// Populates realistic demo data for AttendPAC: extra sites, one biometric
+// Populates realistic demo data for ActivHR: extra sites, one biometric
 // device per site, ~15 demo staff accounts (real auth.users, via the Admin
 // API — this is why it needs the service role key and has to run locally,
 // not from a sandboxed CI/agent environment), 7 days of attendance history
@@ -62,7 +62,7 @@ function slugifyEmail(name, i) {
     name
       .toLowerCase()
       .replace(/[^a-z]+/g, ".")
-      .replace(/^\.|\.$/g, "") + `+demo${i}@attendpac.test`
+      .replace(/^\.|\.$/g, "") + `+demo${i}@activhr.test`
   );
 }
 

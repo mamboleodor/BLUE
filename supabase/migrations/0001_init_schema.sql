@@ -1,4 +1,4 @@
--- AttendPAC — Phase 1 Foundation
+-- ActivHR — Phase 1 Foundation
 -- Implements Section 05 (Database Schema Reference) and Section 06
 -- (Roles, Auth & Permissions) of the Technical Architecture Proposal.
 --
