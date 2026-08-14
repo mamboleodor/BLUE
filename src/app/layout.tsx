@@ -1,3 +1,4 @@
+import { CookieConsent } from "@/components/site/cookie-consent";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -67,6 +68,7 @@ export default function RootLayout({
               online-only build is unaffected. */}
           <PowerSyncProvider>{children}</PowerSyncProvider>
         </ThemeProvider>
+ <CookieConsent />
       </body>
     </html>
   );

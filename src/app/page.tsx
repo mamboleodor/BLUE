@@ -1,5 +1,4 @@
 import StarsBackground from "@/components/StarsBackground";
-import HoverRevealBox from "@/components/HoverRevealBox";
 import Link from "next/link";
 import {
   Smartphone,
@@ -266,11 +265,12 @@ export default function Home() {
       </section>
 
     {/* Contact */}
+{/* Contact */}
 <section id="contact">
   <StarsBackground className="w-full">
     <div className="mx-auto max-w-6xl px-6 py-16">
       <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-        <HoverRevealBox className="p-6">
+        <div className="p-6">
           <div>
             <BlurLabel text="Get in touch" className="font-label text-primary" />
             <RevealHeading className="mt-4 font-serif text-3xl">
@@ -297,7 +297,7 @@ export default function Home() {
               </div>
             </dl>
           </div>
-        </HoverRevealBox>
+        </div>
 
         <ContactForm />
       </div>

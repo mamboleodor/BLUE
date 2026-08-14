@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
 import { Check, Loader2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,6 +21,9 @@ export function ContactForm() {
     "idle"
   );
 
+  // Not wired to a backend yet — see README "Next steps". Once Supabase is
+  // in place this should insert into a `pilot_requests` table or POST to a
+  // route handler that forwards to email/CRM.
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("submitting");
